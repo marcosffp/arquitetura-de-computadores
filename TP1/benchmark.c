@@ -6,7 +6,7 @@
 #include <xmmintrin.h> // Para a implementação SSE
 
 #define _GNU_SOURCE
-#define TABLE_SIZE 10000
+#define TABLE_SIZE 100000
 #define OUTPUT_CSV_FILE                                                        \
   "benchmark_results.csv" // Nome fixo para o arquivo CSV de saída
 
@@ -138,7 +138,7 @@ void print_resource_usage(const char *label, struct rusage *usage) {
 }
 
 // Função para escrever resultados no arquivo CSV
-void write_to_csv(const char *method, int element_index,
+void write_to_csv(const char *method,
                   struct rusage *start_usage, struct rusage *end_usage) {
   FILE *file = fopen(OUTPUT_CSV_FILE, "a");
   if (!file) {
@@ -176,18 +176,11 @@ int main(int argc, char **argv) {
 
   struct rusage start_usage, end_usage;
 
+  get_resource_usage(&start_usage);
   for (int i = 0; i < num_elements; i++) {
-    get_resource_usage(&start_usage);
     normalize_feature_vector(features[i], num_dimensions, method);
-    get_resource_usage(&end_usage);
-
-    // Escrever resultados no arquivo CSV
-    const char *method_name = method == 1   ? "Lookup Table"
-                              : method == 2 ? "Quake III"
-                              : method == 3 ? "SSE"
-                                            : "Default";
-    write_to_csv(method_name, i, &start_usage, &end_usage);
   }
+  get_resource_usage(&end_usage);
 
   printf("Normalized features:\n");
   for (int i = 0; i < num_elements; i++) {
@@ -197,10 +190,17 @@ int main(int argc, char **argv) {
     printf("\n");
   }
 
-  printf("Method: %s\n", method == 2   ? "Quake III"
-                         : method == 3 ? "SSE"
-                         : method == 1 ? "Lookup Table"
-                                       : "Default inversion");
+  printf("Execution time and resource usage:\n");
+  print_resource_usage("Start Usage", &start_usage);
+  print_resource_usage("End Usage", &end_usage);
+
+  // Escrever resultados no arquivo CSV
+  const char *method_name = method == 1   ? "Lookup Table"
+                            : method == 2 ? "Quake III"
+                            : method == 3 ? "SSE"
+                                          : "Default";
+  write_to_csv(method_name, &start_usage, &end_usage);
+  printf("Method: %s\n", method_name);
   printf("Execution time and resource usage recorded in CSV file.\n");
 
   // Free allocated memory

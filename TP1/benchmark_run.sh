@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Nomes dos arquivos CSV de entrada
-csv_files=("test_data_1.csv" "test_data_10.csv" "test_data_100.csv" "test_data_1000.csv" "test_data_10000.csv")
+#csv_files=("test_data_1.csv" "test_data_10.csv" "test_data_100.csv" "test_data_1000.csv" "test_data_10000.csv")
+csv_files=("data/large_dataset_50000.csv" "data/large_dataset_100000.csv" "data/large_dataset_150000.csv" "data/large_dataset_200000.csv" "data/large_dataset_250000.csv")
 
 # Métodos de normalização (1: Lookup Table, 2: Quake III, 3: SSE, 0: Default)
 methods=(1 2 3 0)
