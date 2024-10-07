@@ -49,7 +49,7 @@ pip install matplotlib numpy pandas
 1. **Compile the benchmarking code**:
 
    ```bash
-   gcc -o benchmark benchmark.c -O2
+   gcc -o benchmark benchmark.c -lm -msse -O2
    ```
 
 2. **Run the benchmark for each method and dataset**:
