@@ -1,4 +1,4 @@
-# Technical Report on Normalization Methods
+# Evaluation of Performance Impact on `normalize_feature_vector` method 🚀
 
 This repository contains the code, scripts, and data used to benchmark different square root inversion normalization methods. The methods compared are:
 
