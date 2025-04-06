@@ -1,4 +1,3 @@
-```markdown
 # Benchmark de Normalização Vetorial com Raiz Quadrada Inversa
 
 Este projeto em C tem como objetivo comparar diferentes métodos de cálculo da raiz quadrada inversa para normalização de vetores, medindo o desempenho de cada abordagem.
